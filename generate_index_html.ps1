@@ -159,7 +159,7 @@ function Get-DirectoryHtml {
     foreach ($item in $items) {
         $currentRelativePath = "$RelativePath/$($item.Name)"
         if ($item.PSIsContainer) {
-            # Ignore .git directory and the Schools directory
+            # Ignore .git and Schools directories
             if ($item.Name -eq ".git" -or $item.Name -eq "Schools") {
                 continue
             }
