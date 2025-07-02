@@ -1,1 +1,1 @@
-thsc mirror
+HSC Resources
