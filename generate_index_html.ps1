@@ -85,7 +85,7 @@ $htmlHeader = @"
 </head>
 <body>
     <div class="container">
-        <h1>THSC</h1>
+        <h1>HSC Mathematics Resources</h1>
         <input type="text" id="search-input" placeholder="Search for files and folders...">
         <div class="folder-structure">
 "@
