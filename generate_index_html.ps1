@@ -154,7 +154,8 @@ function Get-DirectoryHtml {
     )
 
     $html = ""
-    $items = Get-ChildItem -Path $Path | Sort-Object -Property Name
+    # Sort so that folders are always on top, then files, both alphabetically
+    $items = Get-ChildItem -Path $Path | Sort-Object @{ Expression = { -not $_.PSIsContainer } }, Name
 
     foreach ($item in $items) {
         $currentRelativePath = "$RelativePath/$($item.Name)"
