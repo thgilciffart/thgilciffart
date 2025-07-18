@@ -94,7 +94,7 @@ $htmlHeader = @"
 $htmlFooter = @"
         </div>
         <div style='text-align:center; margin-top:30px; font-size:0.95em; color:#888;'>
-            <a href='https://github.com/thgilciffart/thgilciffart.github.io' target='_blank' style='color:#888; text-decoration:underline;'>Visit Github repo</a>
+            <a href='https://github.com/thgilciffart/thgilciffart.github.io' target='_blank' style='color:#888; text-decoration:underline;'>Visit the Github repository</a>
         </div>
     </div>
     <script>
