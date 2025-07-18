@@ -93,6 +93,9 @@ $htmlHeader = @"
 # Define the footer of the HTML file
 $htmlFooter = @"
         </div>
+        <div style='text-align:center; margin-top:30px; font-size:0.95em; color:#888;'>
+            <a href='https://github.com/thgilciffart/thgilciffart.github.io' target='_blank' style='color:#888; text-decoration:underline;'>Visit Github repo</a>
+        </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
