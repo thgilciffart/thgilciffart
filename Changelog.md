@@ -4,3 +4,5 @@
 - Started adding Physics and Chemistry HSC Papers
 # 19/07/2025
 - Finished adding Chemistry preliminary and HSC trial and internal papers.
+- Finished adding Biology preliminary and HSC trial and internal papers.
+- Finished adding Physics preliminary and HSC trial and internal papers.
