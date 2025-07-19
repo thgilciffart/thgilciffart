@@ -5,12 +5,14 @@ $htmlHeader = @"
 <head>
     <title>HSC Mathematics Resources</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
             color: #212529;
             margin: 0;
+            transition: background 0.3s, color 0.3s;
         }
         .container {
             max-width: 960px;
@@ -81,10 +83,45 @@ $htmlHeader = @"
             margin-right: 12px;
             color: #dc3545;
         }
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #181a1b;
+            color: #e0e0e0;
+        }
+        .dark-mode .container {
+            background: none;
+        }
+        .dark-mode .folder-structure {
+            background-color: #23272b;
+            border-color: #343a40;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.25);
+        }
+        .dark-mode #search-input {
+            background-color: #23272b;
+            color: #e0e0e0;
+            border: 1px solid #343a40;
+        }
+        .dark-mode .folder-name:hover,
+        .dark-mode .file a:hover {
+            background-color: #343a40;
+        }
+        .dark-mode .folder-name i {
+            color: #bdbdbd;
+        }
+        .dark-mode .file a {
+            color: #66b3ff;
+        }
+        .dark-mode .file i {
+            color: #ff7675;
+        }
+        .dark-mode a {
+            color: #66b3ff;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <button id="dark-mode-toggle" style="float:right; margin-bottom:10px; padding:6px 16px; border-radius:6px; border:none; background:#343a40; color:#fff; cursor:pointer; font-size:1em; font-family:inherit;">Toggle Dark Mode</button>
         <h1>HSC Mathematics Resources</h1>
         <input type="text" id="search-input" placeholder="Search for files and folders...">
         <div class="folder-structure">
@@ -99,6 +136,24 @@ $htmlFooter = @"
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+            // Load preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+                darkModeToggle.textContent = 'Light Mode';
+            }
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    darkModeToggle.textContent = 'Light Mode';
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    darkModeToggle.textContent = 'Dark Mode';
+                }
+            });
             const folderNames = document.querySelectorAll('.folder-name');
             folderNames.forEach(name => {
                 name.addEventListener('click', event => {
@@ -168,7 +223,7 @@ function Get-DirectoryHtml {
                 continue
             }
             $html += "<div class=`"folder`">"
-            $html += "<div class=`"folder-name`"><i class=`"fas fa-folder`"></i> $($item.Name)</div>"
+            $html += "<div class=`"folder-name`"><i class='fas fa-folder'></i> $($item.Name)</div>"
             $html += "<div class=`"folder-contents`">"
             $html += Get-DirectoryHtml -Path $item.FullName -RelativePath $currentRelativePath
             $html += "</div>"
@@ -176,7 +231,7 @@ function Get-DirectoryHtml {
         } else {
             if ($item.Extension -eq ".pdf") {
                 $html += "<div class=`"file`">"
-                $html += "<a href=`"$currentRelativePath`" target=`"_blank`"><i class=`"fas fa-file-pdf`"></i> $($item.Name)</a>"
+                $html += "<a href=`"$currentRelativePath`" target=`"_blank`"><i class='fas fa-file-pdf'></i> $($item.Name)</a>"
                 $html += "</div>"
             }
         }
