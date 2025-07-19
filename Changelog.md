@@ -6,3 +6,4 @@
 - Finished adding Chemistry preliminary and HSC trial and internal papers.
 - Finished adding Biology preliminary and HSC trial and internal papers.
 - Finished adding Physics preliminary and HSC trial and internal papers.
+- Dark mode!
