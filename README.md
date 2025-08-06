@@ -4,3 +4,4 @@
 - Any issues with the website please make an issue.
 - If you wish to contribute please add a pull request. 
 # [Changelog](Changelog.md)
+# [Further resources](Resources.md)

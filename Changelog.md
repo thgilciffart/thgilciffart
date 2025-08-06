@@ -7,3 +7,5 @@
 - Finished adding Biology preliminary and HSC trial and internal papers.
 - Finished adding Physics preliminary and HSC trial and internal papers.
 - Dark mode!
+# 6/08/2025
+- Added further resources
