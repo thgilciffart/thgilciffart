@@ -5,3 +5,8 @@
 - If you wish to contribute please add a pull request. 
 # [Changelog](Changelog.md)
 # [Further resources](Resources.md)
+# Credit 
+- Amiyuki7 for the inverse trig reference sheet 
+- Normanhurst Boys Highschool for booklets
+- NSB for inequality booklet 
+- THSC for PDF files

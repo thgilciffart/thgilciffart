@@ -9,3 +9,7 @@
 - Dark mode!
 # 6/08/2025
 - Added further resources
+# 13/08/2025
+- Added Amiyuki7's inverse trig PDF
+- Added NSB inequality
+- Added NESA key words
