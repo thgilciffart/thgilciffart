@@ -13,3 +13,5 @@
 - Added Amiyuki7's inverse trig PDF
 - Added NSB inequality
 - Added NESA key words
+# 21/08/2025 
+- Updated Amiyuki7's inverse trig PDF
