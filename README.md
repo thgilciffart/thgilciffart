@@ -8,5 +8,6 @@
 # Credit 
 - Amiyuki7 for the inverse trig reference sheet 
 - Normanhurst Boys Highschool for booklets
-- NSB for inequality booklet 
-- THSC for PDF files
+- NSB for inequality booklet
+- Hugh from [Entwistle](https://www.entwistlemathematics.com.au/) for the probability and mock exams
+- [THSC](https://thsconline.github.io/s/) for PDF files
