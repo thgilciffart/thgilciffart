@@ -10,4 +10,4 @@
 - Normanhurst Boys Highschool for booklets
 - NSB for inequality booklet
 - Hugh from [Entwistle](https://www.entwistlemathematics.com.au/) for the probability and mock exams
-- [THSC](https://thsconline.github.io/s/) for PDF files
+- [THSC](https://thsconline.github.io/s/) for majority of the school papers
