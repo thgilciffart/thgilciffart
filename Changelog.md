@@ -15,3 +15,6 @@
 - Added NESA key words
 # 21/08/2025 
 - Updated Amiyuki7's inverse trig PDF
+
+# 11/10/2025
+- Added Physics, Chemistry, Biology syllabus
