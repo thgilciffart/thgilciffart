@@ -12,3 +12,4 @@
 - NSB for inequality booklet
 - Hugh from [Entwistle](https://www.entwistlemathematics.com.au/) for the probability and mock exams
 - [THSC](https://thsconline.github.io/s/) for majority of the school papers
+- [NSW Maths}(https://nswmaths.com) for the mock exams, and ruiace for the unofficial solutions
