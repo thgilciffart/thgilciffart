@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html>
 <head>
     <title>HSC Mathematics Resources</title>
@@ -118,10 +157,81 @@
         .dark-mode a {
             color: #66b3ff;
         }
+        /* Login form styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .dark-mode .login-container {
+            background-color: #181a1b;
+        }
+        .login-form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: .25rem;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+            width: 100%;
+            max-width: 400px;
+        }
+        .dark-mode .login-form {
+            background-color: #23272b;
+            border-color: #343a40;
+        }
+        .login-form h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            font-size: 1rem;
+        }
+        .dark-mode .login-form input {
+            background-color: #343a40;
+            color: #e0e0e0;
+            border-color: #495057;
+        }
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: .25rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: #dc3545;
+            text-align: center;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div id="login-container" class="login-container">
+        <div class="login-form">
+            <h2>Login to HSC Mathematics Resources</h2>
+            <p id="error-message" class="error-message">Incorrect password. Please try again.</p>
+            <input type="password" id="password-input" placeholder="Enter password">
+            <button id="login-button">Login</button>
+        </div>
+    </div>
+    <div id="main-content" class="container hidden">
         <button id="dark-mode-toggle" style="float:right; margin-bottom:10px; padding:6px 16px; border-radius:6px; border:none; background:#343a40; color:#fff; cursor:pointer; font-size:1em; font-family:inherit;">Toggle Dark Mode</button>
         <h1>HSC Mathematics Resources</h1>
         <input type="text" id="search-input" placeholder="Search for files and folders...">
@@ -136,6 +246,37 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
+            const CORRECT_PASSWORD = 'maths2023'; // Hardcoded password (not secure for production)
+            const loginContainer = document.getElementById('login-container');
+            const mainContent = document.getElementById('main-content');
+            const loginButton = document.getElementById('login-button');
+            const passwordInput = document.getElementById('password-input');
+            const errorMessage = document.getElementById('error-message');
+
+            // Check if already authenticated
+            if (localStorage.getItem('authenticated') === 'true') {
+                loginContainer.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+            }
+
+            loginButton.addEventListener('click', () => {
+                const enteredPassword = passwordInput.value;
+                if (enteredPassword === CORRECT_PASSWORD) {
+                    localStorage.setItem('authenticated', 'true');
+                    loginContainer.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                } else {
+                    errorMessage.style.display = 'block';
+                    passwordInput.value = '';
+                }
+            });
+
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    loginButton.click();
+                }
+            });
+
             // Dark mode toggle
             const darkModeToggle = document.getElementById('dark-mode-toggle');
             const body = document.body;
@@ -196,7 +337,7 @@
                             currentLevel[part].type = 'file';
                             currentLevel[part].path = file.path;
                         } else {
-                             if (!currentLevel[part].type) {
+                            if (!currentLevel[part].type) {
                                 currentLevel[part].type = 'folder';
                             }
                         }
