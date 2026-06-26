@@ -1,4 +1,3 @@
-# README.md
 # [Changelog](Changelog.md)
 # [Further resources](Resources.md)
 # Credit 
