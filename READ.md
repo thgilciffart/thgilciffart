@@ -1,7 +1,10 @@
 # [Changelog](Changelog.md)
+
 # [Further resources](Resources.md)
-# Credit 
-- Amiyuki7 for the inverse trig reference sheet 
+
+# Credit
+
+- Amiyuki7 for the inverse trig reference sheet
 - [Steve Howard's](https://howardmathematics.com/) 1000 Extension 2 Revision Questions  
 - Normanhurst Boys Highschool for booklets
 - NSB for inequality booklet
